@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: "Complete and verify author/citation fields, then rename this file to CITATION.cff before release."
+title: "Neurotoxicity regression for waste-incineration candidate screening"
+version: 1.0.0
+type: software
+authors:
+  - family-names: "REPLACE_WITH_CONFIRMED_AUTHOR_SURNAME"
+    given-names: "REPLACE_WITH_CONFIRMED_GIVEN_NAMES"
+# Add repository-code and doi only after the actual repository/release exists.

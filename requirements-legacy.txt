@@ -1,0 +1,4 @@
+# Only needed to inspect/run archived original plotting scripts.
+-r requirements.txt
+shap==0.50.0
+seaborn==0.13.2

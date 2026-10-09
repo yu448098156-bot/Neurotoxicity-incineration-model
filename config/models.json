@@ -1,0 +1,141 @@
+{
+  "schema_version": 1,
+  "study": "Neurotoxicity regression: source-preserving model comparison",
+  "features": [
+    "MinAbsEStateIndex",
+    "MaxPartialCharge",
+    "BCUT2D_MWHI",
+    "BCUT2D_CHGHI",
+    "BCUT2D_LOGPHI",
+    "BCUT2D_LOGPLOW",
+    "AvgIpc",
+    "BalabanJ",
+    "Ipc",
+    "PEOE_VSA10",
+    "SMR_VSA4",
+    "SMR_VSA6",
+    "SlogP_VSA2",
+    "TPSA",
+    "EState_VSA5",
+    "EState_VSA8",
+    "VSA_EState2",
+    "VSA_EState7",
+    "VSA_EState9",
+    "fr_NH0"
+  ],
+  "train_file": "data/training_set.csv",
+  "test_file": "data/test_set.csv",
+  "expected_input_sha256": {
+    "training_set.csv": "b34d44f9674c3c64c5d43aed24ed9b9163adb681f8f097f2c3dd4f98050a03d6",
+    "test_set.csv": "6562f08611a02827cd2f19d6bfeb0352c589a986c706f27dbe2e71a6c225ff69"
+  },
+  "expected_counts": {
+    "training": 346,
+    "test": 87
+  },
+  "model_order": [
+    "RF",
+    "GBR",
+    "ETR",
+    "SVR",
+    "KNN",
+    "XGBoost",
+    "CatBoost"
+  ],
+  "models": {
+    "RF": {
+      "source": "RF.py",
+      "params": {
+        "n_estimators": 300,
+        "max_depth": null,
+        "random_state": 42
+      }
+    },
+    "GBR": {
+      "source": "GBR.py",
+      "params": {
+        "n_estimators": 200,
+        "learning_rate": 0.05,
+        "max_depth": 5,
+        "random_state": 42
+      }
+    },
+    "ETR": {
+      "source": "ETR.py",
+      "params": {
+        "n_estimators": 500,
+        "max_depth": null,
+        "min_samples_leaf": 1,
+        "min_samples_split": 2,
+        "bootstrap": false,
+        "random_state": 42
+      }
+    },
+    "SVR": {
+      "source": "SVR.py",
+      "params": {
+        "kernel": "rbf",
+        "C": 10.0,
+        "epsilon": 0.1,
+        "gamma": "scale"
+      }
+    },
+    "KNN": {
+      "source": "KNeighborsRegressor.py",
+      "params": {
+        "n_neighbors": 5,
+        "weights": "distance",
+        "metric": "minkowski"
+      }
+    },
+    "XGBoost": {
+      "source": "XGboost.py",
+      "params": {
+        "n_estimators": 400,
+        "learning_rate": 0.05,
+        "max_depth": 4,
+        "subsample": 0.8,
+        "colsample_bytree": 0.8,
+        "reg_lambda": 1.0,
+        "random_state": 42,
+        "verbosity": 0
+      }
+    },
+    "CatBoost": {
+      "source": "catboost-figure1.py",
+      "params": {
+        "iterations": 500,
+        "learning_rate": 0.05,
+        "depth": 6,
+        "loss_function": "RMSE",
+        "random_seed": 42,
+        "verbose": false,
+        "allow_writing_files": false
+      }
+    }
+  },
+  "cv": {
+    "n_splits": 5,
+    "shuffle": true,
+    "random_state": 42,
+    "note": "New shared folds for a consistent refactored comparison; not the unrecorded historical optimisation/CV."
+  },
+  "selected_model": "CatBoost",
+  "selection_basis": "Pre-specified by author/manuscript; CatBoost parameters taken from supplied prediction script, not selected using test scores.",
+  "ice_features": [
+    "EState_VSA5",
+    "SlogP_VSA2",
+    "SMR_VSA4",
+    "VSA_EState2"
+  ],
+  "target": "pLD50",
+  "target_handling": "Use supplied values as-is; no recalculation or rounding. No experimental-route metadata supplied in these CSVs.",
+  "legacy_error_threshold_multiplier": 1.5,
+  "method_changes": [
+    "No model fallback",
+    "Fold-local StandardScaler",
+    "One saved CatBoost model for test predictions, SHAP, ICE and Y-randomization baseline",
+    "Training-only CV for model comparison",
+    "Legacy error-threshold coverage reported separately; not used as an applicability domain"
+  ]
+}

@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "neurotoxicity-incineration-model"
+version = "1.0.0"
+description = "Reproducible comparison and saved-model inference for pLD50 regression"
+readme = "README.md"
+requires-python = ">=3.11,<3.14"
+
+[project.scripts]
+neurotox-model = "neurotox.__main__:main"
+
+[tool.setuptools]
+packages = ["neurotox"]

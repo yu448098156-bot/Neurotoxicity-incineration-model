@@ -1,0 +1,21 @@
+{
+  "prediction": {
+    "iterations": 500,
+    "depth": 6,
+    "learning_rate": 0.05,
+    "random_seed": 42
+  },
+  "shap": {
+    "iterations": 200,
+    "depth": 8,
+    "learning_rate": 0.05,
+    "random_seed": 42
+  },
+  "ice_and_yrandom": {
+    "iterations": 200,
+    "depth": 8,
+    "learning_rate": 0.05,
+    "random_seed": "not explicitly set in original code"
+  },
+  "policy": "Historical profiles are recorded for provenance only. The new interpretation analyses all load the unified prediction-profile model."
+}
